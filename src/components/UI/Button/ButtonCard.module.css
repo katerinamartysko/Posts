@@ -1,0 +1,14 @@
+.buttonCard {
+    width: 149px;
+    height: 40px;
+    background: #DEE6F4;
+    margin: 4px;
+    border-radius: 5px;
+    color: #3D779E;
+    border: none;
+}
+
+.buttonCard__active {
+    color: white;
+    background: teal;
+}
