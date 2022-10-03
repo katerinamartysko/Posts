@@ -91,7 +91,19 @@
     display: flex;
     flex-direction: column;
 }
+
 .goOut {
-align-self: flex-start;
+    align-self: flex-start;
     padding-left: 16px;
 }
+
+.card {
+    border: 2px solid teal;
+    border-radius: 5px;
+    width: 334px;
+    display: flex;
+    flex-wrap: wrap;
+    row-gap: 12px;
+    column-gap: 16px;
+}
+
