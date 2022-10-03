@@ -6,7 +6,7 @@ import { AuthContext } from '../../context';
 import NavBar from './navbar/NavBar';
 
 const AppRouter = () => {
-  const { isAuth, setIsAuth } = useContext(AuthContext);
+  const { isAuth} = useContext(AuthContext);
   console.log(isAuth);
   return (
     isAuth

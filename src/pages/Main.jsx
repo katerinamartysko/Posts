@@ -1,10 +1,7 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
-import MyButton from '../components/UI/Button/myButton';
-import { AuthContext } from '../context';
 
 const Main = () => {
-  const [isAuth, setIsAuth] = useContext(AuthContext);
   return (
     <div>
       <h2>Main page</h2>
