@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 import PostService from '../API/PostService';
 import PostList from '../components/PostList';
 import PostForm from '../components/PostForm';
@@ -12,8 +13,7 @@ import { UseFetching } from '../hooks/UseFetching';
 import { usePosts } from '../hooks/usePost';
 import { getPageCount } from '../utils/pajes';
 import { useObserver } from '../hooks/useObserver';
-import { getPosts } from '../store/posts/actions';
-import { useDispatch, useSelector } from 'react-redux';
+import { createPost, deletePost, getPosts } from '../store/posts/actions';
 
 function Posts() {
   const dispatch = useDispatch();
@@ -50,12 +50,13 @@ function Posts() {
   }, [page]);
 
   const newCreate = (newPost) => {
-    // setPosts([...posts, newPost]); TO DO: will change later
+    dispatch(createPost(newPost));
     setModal(false);
   };
 
   const removePost = (post) => {
-    // setPosts(posts.filter(p => p.id !== post.id)); TO DO: will change later
+    dispatch(deletePost(post));
+    // posts.filter(p => p.id !== post.id)
   };
 
   const changePage = (page) => {
