@@ -13,19 +13,18 @@ import { UseFetching } from '../hooks/UseFetching';
 import { usePosts } from '../hooks/usePost';
 import { getPageCount } from '../utils/pajes';
 import { useObserver } from '../hooks/useObserver';
-import { createPost, deletePost, getPosts } from '../store/posts/actions';
+import { changePage, createPost, deletePost, getPosts } from '../store/posts/actions';
 
 function Posts() {
   const dispatch = useDispatch();
   const posts = useSelector(state => state.posts.posts);
+  const page = useSelector(state => state.posts.page)
 
   const [filter, setFilter] = useState({ sort: '', query: '' });
   const [modal, setModal] = useState(false);
   const [totalPages, setTotalPages] = useState(0);
   const [limit] = useState(10);
-  const [page, setPage] = useState(1);
   const sortedAndSearchPosts = usePosts(posts, filter.sort, filter.query);
-  const lastElement = useRef();
 
   const [fetchPost, isPostsLoading, postError] = UseFetching(async (limit, page) => {
     const response = await PostService.getAll(limit, page);
@@ -41,10 +40,6 @@ function Posts() {
   // в useMemo передаем первым парасетром callback (резулттат каких-то вычеслений), а втором параметром массив зависимостей
   //callback будет вызыан только если одна из зависимостей в массиве ( deps) поменяет свое значение
 
-  useObserver(lastElement, page < totalPages, isPostsLoading, () => {
-    setPage(page + 1);
-  });
-
   useEffect(() => {
     fetchPost(limit, page);
   }, [page]);
@@ -56,11 +51,11 @@ function Posts() {
 
   const removePost = (post) => {
     dispatch(deletePost(post));
-    // posts.filter(p => p.id !== post.id)
   };
 
-  const changePage = (page) => {
-    setPage(page);
+  const changePage1 = (page) => {
+    dispatch(changePage(page));
+    // setPage(page);
   };
 
   return (
@@ -82,14 +77,13 @@ function Posts() {
 
       {postError && <h1>Произошла ошибка {postError}</h1>}
       <PostList remove={removePost} posts={sortedAndSearchPosts} title="Посты про JS" />
-      <div ref={lastElement} style={{ height: 20, background: 'hotpink' }} />
       {isPostsLoading &&
         <div style={{ display: 'flex', justifyContent: 'center', marginTop: 56 }}><Loader /></div>
       }
 
       <Pagination
         page={page}
-        changePage={changePage}
+        changePage={changePage1}
         totalPages={totalPages}
       />
     </div>

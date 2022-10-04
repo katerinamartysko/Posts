@@ -1,7 +1,8 @@
 import c from '../constants';
 
 const INITIAL_STATE = {
-  posts: []
+  posts: [],
+  page: 1
 };
 
 export const postsReducer = (state = INITIAL_STATE, action) => {
@@ -20,11 +21,20 @@ export const postsReducer = (state = INITIAL_STATE, action) => {
         ...state,
         posts: [...state.posts, newPost]
       };
-    }case c.DELETE_POST: {
+    }
+
+    case c.DELETE_POST: {
       const posts = action.payload;
       return {
         ...state,
         posts: state.posts.filter(p => p.id !== posts.id)
+      };
+    }
+    case c.CHANGE_PAGE: {
+      const page = action.payload;
+      return {
+        ...state,
+        page: page
       };
     }
 
