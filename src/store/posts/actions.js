@@ -15,3 +15,8 @@ export const deletePost = (post) => ({
   payload: post
 });
 
+export const changePage = (post) => ({
+  type: c.CHANGE_PAGE,
+  payload: post
+});
+
