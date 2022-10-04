@@ -1,3 +1,5 @@
+import c from '../constants';
+
 const INITIAL_STATE = {
   categories: [
     { id: 1, title: 'Active', isActive: true },
@@ -9,7 +11,7 @@ const INITIAL_STATE = {
 
 export const categories = (state = INITIAL_STATE, action) => {
   switch (action.type) {
-    case 'CHANGE_ACTIVE_CATEGORY': {
+    case c.CHANGE_ACTIVE_CATEGORY: {
       const cardId = action.payload;
       return {
         ...state,

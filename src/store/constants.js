@@ -1,5 +1,6 @@
 const c = {
-  CHANGE_ACTIVE_CATEGORY: 'CHANGE_ACTIVE_CATEGORY'
-}
+  CHANGE_ACTIVE_CATEGORY: 'CHANGE_ACTIVE_CATEGORY',
+  GET_ALL_POSTS: 'GET_ALL_POSTS'
+};
 
-export default c
+export default c;

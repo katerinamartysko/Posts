@@ -12,9 +12,12 @@ import { UseFetching } from '../hooks/UseFetching';
 import { usePosts } from '../hooks/usePost';
 import { getPageCount } from '../utils/pajes';
 import { useObserver } from '../hooks/useObserver';
+import { getPosts } from '../store/posts/actions';
+import { useDispatch, useSelector } from 'react-redux';
 
 function Posts() {
-  const [posts, setPosts] = useState([]);
+  const dispatch = useDispatch();
+  const posts = useSelector(state => state.posts.posts);
 
   const [filter, setFilter] = useState({ sort: '', query: '' });
   const [modal, setModal] = useState(false);
@@ -26,7 +29,7 @@ function Posts() {
 
   const [fetchPost, isPostsLoading, postError] = UseFetching(async (limit, page) => {
     const response = await PostService.getAll(limit, page);
-    setPosts([...posts, ...response.data]);
+    dispatch(getPosts(response.data));
     const totalCount = response.headers['x-total-count'];
     setTotalPages(getPageCount(totalCount, limit));
   });
@@ -47,12 +50,12 @@ function Posts() {
   }, [page]);
 
   const newCreate = (newPost) => {
-    setPosts([...posts, newPost]);
+    // setPosts([...posts, newPost]); TO DO: will change later
     setModal(false);
   };
 
   const removePost = (post) => {
-    setPosts(posts.filter(p => p.id !== post.id));
+    // setPosts(posts.filter(p => p.id !== post.id)); TO DO: will change later
   };
 
   const changePage = (page) => {
