@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import './styles/App.css';
 import AppRouter from './components/UI/AppRouter';
 import { AuthContext } from './context';
+import './styles/App.css';
 
 const App = () => {
   const auth = localStorage.getItem('auth');
